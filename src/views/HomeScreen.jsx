@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Image, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import { Card } from 'react-native-paper';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { app } from '../config/utils/firabaseConnection';
+import React, { useEffect, useState } from "react";
+import { View, FlatList, Image, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { Card } from "react-native-paper";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { app } from "../config/utils/firabaseConnection";
 
 const HomeScreen = () => {
   const [products, setProducts] = useState([]);
@@ -11,9 +11,9 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const db = getFirestore(app);
-      const productsCollection = collection(db, 'product');
+      const productsCollection = collection(db, "product");
       const productsSnapshot = await getDocs(productsCollection);
-      const productList = productsSnapshot.docs.map(doc => doc.data());
+      const productList = productsSnapshot.docs.map((doc) => doc.data());
       setProducts(productList);
       setLoading(false);
     };
@@ -26,6 +26,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* 🔹 TITULO BONITO */}
+      <Text style={styles.header}>TIENDA UTEZ</Text>
+
       <FlatList
         data={products}
         numColumns={2}
@@ -46,37 +49,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50, // Ajusta la distancia desde arriba
-    backgroundColor: '#f8f8f8'
+    backgroundColor: "#f8f8f8",
   },
   loader: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 10,
+    color: "#4abfa4",
   },
   card: {
     margin: 10,
     padding: 10,
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 3
+    elevation: 3,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 150,
-    borderRadius: 10
+    borderRadius: 10,
   },
   title: {
-    fontWeight: 'bold',
-    marginTop: 5
+    fontWeight: "bold",
+    marginTop: 5,
   },
   price: {
-    color: 'gray'
-  }
+    color: "gray",
+  },
 });
 
 export default HomeScreen;

@@ -23,7 +23,6 @@ const ProfileScreen = () => {
           <Text>{user.email}</Text>
           <Text style={{ marginTop: 10, fontStyle: 'italic', color: 'gray' }}>Bienvenido a tu perfil</Text>
           <Text style={{ marginTop: 20, fontSize: 16 }}>Disfruta de tu experiencia de compra</Text>
-          <Button title="Cerrar sesión" onPress={handleLogout} />
         </>
       ) : (
         <Text>No hay usuario autenticado</Text>
